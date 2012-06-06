@@ -18,7 +18,7 @@ Building:
    If the patching fails for some reason (ie, changes in SQLite3), it should be trivial to do it manually.
 
 3. Compile the sqlite3 library with Botan encryption support:
-    $ gcc -c sqlite3.c -o botansqlite3.o && gcc -c codec.cpp -o codec.o -I /usr/include/botan-1.10/ && ar rcs libbotansqlite3.a botansqlite3.o codec.o
+    $ gcc -c sqlite3.c -o botansqlite3.o && gcc -c codec.cpp -o codec.o `pkg-config --cflags botan-1.10` && ar rcs libbotansqlite3.a botansqlite3.o codec.o
     
     (replace "botan-1.10" with appropriate version)
 

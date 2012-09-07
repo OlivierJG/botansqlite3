@@ -30,6 +30,7 @@ void Codec::InitializeCodec(void *db)
     m_hasReadKey  = false;
     m_hasWriteKey = false;
     m_db = db;
+    m_botanErrorMsg = 0;
 
     try
     {

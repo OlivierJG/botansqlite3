@@ -9,6 +9,7 @@
 #define _CODEC_H_
 
 #include <string>
+#include <memory>
 #include <botan/botan.h>
 #include <botan/loadstor.h>
 

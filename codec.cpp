@@ -52,12 +52,12 @@ void Codec::GenerateWriteKey(const char *userPassword, int passwordLength)
     try
     {
 #if BOTAN_VERSION_CODE >= BOTAN_VERSION_CODE_FOR(1,9,4)
-        PBKDF *pbkdf = get_pbkdf(PBKDF_STR);
+        std::auto_ptr<PBKDF> pbkdf(get_pbkdf(PBKDF_STR));
         SymmetricKey masterKey =
             pbkdf->derive_key(KEY_SIZE + IV_DERIVATION_KEY_SIZE, std::string(userPassword, passwordLength),
                               (const byte*)SALT_STR.c_str(), SALT_SIZE, PBKDF_ITERATIONS);
 #elif BOTAN_VERSION_CODE >= BOTAN_VERSION_CODE_FOR(1,8,0)
-        S2K* s2k = get_s2k(PBKDF_STR);
+        std::auto_ptr<S2K> s2k(get_s2k(PBKDF_STR));
         s2k->set_iterations(PBKDF_ITERATIONS);
         s2k->change_salt((const byte*)SALT_STR.c_str(), SALT_SIZE);
 

@@ -125,15 +125,17 @@ void sqlite3CodecGetKey(sqlite3* db, int nDb, void **zKey, int *nKey)
     *nKey = -1;
 }
 
-int sqlite3_key_v2(sqlite3 *db, const char */*zDbName*/, const void *zKey, int nKey)
+int sqlite3_key_v2(sqlite3 *db, const char *zDbName, const void *zKey, int nKey)
 {
     //We don't use zDbName (though maybe we could...). Pass-through to the old sqlite_key
+    (void)(zDbName);
     return sqlite3_key(db, zKey, nKey);
 }
 
-int sqlite3_rekey_v2(sqlite3 *db, const char * /*zDbName*/, const void *zKey, int nKey)
+int sqlite3_rekey_v2(sqlite3 *db, const char * zDbName, const void *zKey, int nKey)
 {
     //We don't use zDbName (though maybe we could...). Pass-through to the old sqlite_rekey
+    (void)(zDbName);
     return sqlite3_rekey(db, zKey, nKey);
 }
 

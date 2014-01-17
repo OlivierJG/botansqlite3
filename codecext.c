@@ -125,6 +125,18 @@ void sqlite3CodecGetKey(sqlite3* db, int nDb, void **zKey, int *nKey)
     *nKey = -1;
 }
 
+int sqlite3_key_v2(sqlite3 *db, const char */*zDbName*/, const void *zKey, int nKey)
+{
+    //We don't use zDbName (though maybe we could...). Pass-through to the old sqlite_key
+    return sqlite3_key(db, zKey, nKey);
+}
+
+int sqlite3_rekey_v2(sqlite3 *db, const char * /*zDbName*/, const void *zKey, int nKey)
+{
+    //We don't use zDbName (though maybe we could...). Pass-through to the old sqlite_rekey
+    return sqlite3_rekey(db, zKey, nKey);
+}
+
 int sqlite3_key(sqlite3 *db, const void *zKey, int nKey)
 {
     // The key is only set for the main database, not the temp database
